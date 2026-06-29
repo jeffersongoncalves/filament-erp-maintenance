@@ -1,6 +1,5 @@
 <?php
 
-use Filament\Actions\Testing\TestAction;
 use JeffersonGoncalves\Erp\Core\Enums\DocStatus;
 use JeffersonGoncalves\Erp\Core\Models\Company;
 use JeffersonGoncalves\Erp\Maintenance\Models\MaintenanceSchedule;
@@ -61,7 +60,7 @@ it('can add a schedule item through the relation manager', function () {
         'ownerRecord' => $schedule,
         'pageClass' => EditMaintenanceSchedule::class,
     ])
-        ->callAction(TestAction::make('create')->table(), data: [
+        ->callTableAction('create', null, [
             'item_code' => 'AC-UNIT',
             'item_name' => 'Air Conditioner',
             'start_date' => '2024-01-01',
@@ -85,7 +84,7 @@ it('submits a maintenance schedule through the UI and generates its visit detail
     ]);
 
     Livewire::test(ListMaintenanceSchedules::class)
-        ->callAction(TestAction::make('submit')->table($schedule));
+        ->callTableAction('submit', $schedule);
 
     $schedule->refresh();
 
@@ -104,7 +103,7 @@ it('regenerates visit details through the Generate Schedule action', function ()
     ]);
 
     Livewire::test(ListMaintenanceSchedules::class)
-        ->callAction(TestAction::make('generateSchedule')->table($schedule));
+        ->callTableAction('generateSchedule', $schedule);
 
     expect($schedule->scheduleDetails()->count())->toBe(4);
 });
