@@ -2,10 +2,8 @@
 
 namespace JeffersonGoncalves\FilamentErp\Maintenance\Resources\MaintenanceSchedules;
 
-use BackedEnum;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Schemas\Schema;
-use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use JeffersonGoncalves\Erp\Maintenance\Support\ModelResolver;
 use JeffersonGoncalves\FilamentErp\Maintenance\FilamentErpMaintenancePlugin;
@@ -19,7 +17,7 @@ use JeffersonGoncalves\FilamentErp\Maintenance\Resources\MaintenanceSchedules\Ta
 
 class MaintenanceScheduleResource extends Resource
 {
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCalendarDays;
+    protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
 
     protected static ?int $navigationSort = 10;
 
@@ -39,9 +37,9 @@ class MaintenanceScheduleResource extends Resource
         }
     }
 
-    public static function form(Schema $schema): Schema
+    public static function form(Form $form): Form
     {
-        return MaintenanceScheduleForm::configure($schema);
+        return MaintenanceScheduleForm::configure($form);
     }
 
     public static function table(Table $table): Table
