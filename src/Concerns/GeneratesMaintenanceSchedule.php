@@ -2,8 +2,9 @@
 
 namespace JeffersonGoncalves\FilamentErp\Maintenance\Concerns;
 
+use Filament\Actions\Action;
 use Filament\Notifications\Notification;
-use Filament\Tables\Actions\Action;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Model;
 use JeffersonGoncalves\Erp\Maintenance\Models\MaintenanceSchedule;
 use JeffersonGoncalves\Erp\Maintenance\Services\MaintenanceScheduleService;
@@ -25,7 +26,7 @@ trait GeneratesMaintenanceSchedule
     {
         return Action::make('generateSchedule')
             ->label('Generate Schedule')
-            ->icon('heroicon-o-calendar-days')
+            ->icon(Heroicon::OutlinedCalendarDays)
             ->color('primary')
             ->requiresConfirmation()
             ->action(function (Model $record): void {
