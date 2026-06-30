@@ -2,8 +2,10 @@
 
 namespace JeffersonGoncalves\FilamentErp\Maintenance\Resources\MaintenanceVisits;
 
-use Filament\Forms\Form;
+use BackedEnum;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use JeffersonGoncalves\Erp\Maintenance\Support\ModelResolver;
 use JeffersonGoncalves\FilamentErp\Maintenance\FilamentErpMaintenancePlugin;
@@ -16,7 +18,7 @@ use JeffersonGoncalves\FilamentErp\Maintenance\Resources\MaintenanceVisits\Table
 
 class MaintenanceVisitResource extends Resource
 {
-    protected static ?string $navigationIcon = 'heroicon-o-wrench-screwdriver';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedWrenchScrewdriver;
 
     protected static ?int $navigationSort = 20;
 
@@ -36,9 +38,9 @@ class MaintenanceVisitResource extends Resource
         }
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return MaintenanceVisitForm::configure($form);
+        return MaintenanceVisitForm::configure($schema);
     }
 
     public static function table(Table $table): Table
