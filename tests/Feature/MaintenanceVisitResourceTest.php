@@ -1,6 +1,5 @@
 <?php
 
-use Filament\Actions\Testing\TestAction;
 use JeffersonGoncalves\Erp\Core\Enums\DocStatus;
 use JeffersonGoncalves\Erp\Core\Models\Company;
 use JeffersonGoncalves\Erp\Maintenance\Enums\CompletionStatus;
@@ -66,7 +65,7 @@ it('adds a purpose through the relation manager and recomputes completion status
         'ownerRecord' => $visit,
         'pageClass' => EditMaintenanceVisit::class,
     ])
-        ->callAction(TestAction::make('create')->table(), data: [
+        ->callTableAction('create', null, [
             'item_code' => 'PUMP-1',
             'purpose_type' => 'Maintenance',
             'description' => 'Inspect pump',
@@ -85,7 +84,7 @@ it('submits a maintenance visit through the UI', function () {
     $visit = makeVisit();
 
     Livewire::test(ListMaintenanceVisits::class)
-        ->callAction(TestAction::make('submit')->table($visit));
+        ->callTableAction('submit', $visit);
 
     expect($visit->refresh()->docstatus)->toBe(DocStatus::Submitted);
 });
