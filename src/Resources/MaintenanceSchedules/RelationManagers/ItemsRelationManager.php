@@ -2,12 +2,12 @@
 
 namespace JeffersonGoncalves\FilamentErp\Maintenance\Resources\MaintenanceSchedules\RelationManagers;
 
-use Filament\Actions;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Schemas\Schema;
+use Filament\Tables\Actions;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -17,11 +17,11 @@ class ItemsRelationManager extends RelationManager
 
     protected static ?string $title = 'Items';
 
-    public function form(Schema $schema): Schema
+    public function form(Form $form): Form
     {
-        return $schema
+        return $form
             ->columns(2)
-            ->components([
+            ->schema([
                 TextInput::make('item_code')
                     ->label('Item Code')
                     ->required()
@@ -95,7 +95,7 @@ class ItemsRelationManager extends RelationManager
             ->headerActions([
                 Actions\CreateAction::make(),
             ])
-            ->recordActions([
+            ->actions([
                 Actions\EditAction::make(),
                 Actions\DeleteAction::make(),
             ]);
